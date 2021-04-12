@@ -16,8 +16,8 @@
     <description>Demo project for Spring Boot</description>
     <modules>
         <module>service-tm</module>
-        <module>rm-tcc</module>
-        <module>rm-at</module>
+        <module>service-tcc1</module>
+        <module>service-at</module>
     </modules>
 
     <properties>

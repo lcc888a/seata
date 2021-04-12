@@ -7,32 +7,32 @@ spring:
     name: service-tm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.78.157.251:3306/seata_test?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: Teamer2018.
+    url: jdbc:mysql://127.0.0.1/seata?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username:
+    password:
     type: com.alibaba.druid.pool.DruidDataSource
   cloud:
     nacos:
       discovery:
-        server-addr: 114.116.14.26:8848
-        namespace: 8f11aeb1-5042-461b-b88b-d47a7f7e01c0
+        server-addr:
+        namespace:
 
 seata:
   enabled: true
   application-id: ${spring.application.name}
-  tx-service-group: seata-demo
-  service:
-    vgroup-mapping:
-      seata-demo: guangzhou
+  tx-service-group: my_test_tx_group
   config:
-    type: file
-    file:
-      name: file.conf
+    type: nacos
+    nacos:
+      #需要和server在同一个注册中心下
+      serverAddr:
+      namespace:
+      #需要server端(registry和config)、nacos配置client端(registry和config)保持一致
+      group: SEATA_GROUP
   registry:
     type: nacos
     nacos:
       cluster: default
-      group: DEFAULT_GROUP
-      application: seata-server
-      server-addr: 114.116.14.26:8848
-      namespace: 8f11aeb1-5042-461b-b88b-d47a7f7e01c0
+      server-addr:
+      namespace:
+      group: SEATA_GROUP
