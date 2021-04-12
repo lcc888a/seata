@@ -1,0 +1,38 @@
+server:
+  port: 7800
+  tomcat.uri-encoding: utf-8
+
+spring:
+  application:
+    name: service-tcc
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/seata_test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root123
+    type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.10.21.187:8848
+        namespace: 4d3efb13-5347-4449-8e5b-30405c0a14c2
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  config:
+    type: nacos
+    nacos:
+      #需要和server在同一个注册中心下
+      serverAddr: 10.10.21.187:8848
+      namespace: 4d3efb13-5347-4449-8e5b-30405c0a14c2
+      #需要server端(registry和config)、nacos配置client端(registry和config)保持一致
+      group: SEATA_GROUP
+  registry:
+    type: nacos
+    nacos:
+      cluster: default
+      server-addr: 10.10.21.187:8848
+      namespace: 4d3efb13-5347-4449-8e5b-30405c0a14c2
+      group: SEATA_GROUP
